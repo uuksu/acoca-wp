@@ -1,0 +1,89 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Acoca.DrinksPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="ACOCA" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="Drinks" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel>
+                <Button x:Name="AddNewDrinkButton" HorizontalAlignment="Left" VerticalAlignment="Top" Width="456" Height="102" Click="AddNewDrinkButton_Click">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Source="Images\plus.png" Width="40" Grid.Column="0" />
+                        <TextBlock Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">Add new drink</TextBlock>
+                    </Grid>
+                </Button>
+                <ListBox x:Name="DrinkListBox" Height="497">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <ContentPresenter
+                                        HorizontalAlignment="Stretch" 
+                                       VerticalAlignment="Stretch"
+                                   />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Width="350" Orientation="Vertical">
+                                    <TextBlock FontSize="24" Text="{Binding Name}"></TextBlock>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Value}"></TextBlock>
+                                        <TextBlock Grid.Column="1" Grid.Row="0">€</TextBlock>
+                                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding AlcoholLevel}"></TextBlock>
+                                        <TextBlock Grid.Column="1" Grid.Row="1">%</TextBlock>
+                                    </Grid>
+                                </StackPanel>
+                                <Button x:Name="ConsumeDrinkButton" Tag="{Binding Id}" Click="ConsumeDrinkButton_Click" Width="120">Drink</Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>
